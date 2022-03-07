@@ -45,9 +45,22 @@ function App() {
   const updateWinStats = (newNums) => {
     const numsMatched = compareLotteryNums(numsSelected, newNums);
 
-    setWinStats({
-      ...winStats,
-    });
+    if (numsMatched > 1) {
+      let updatedWinStats = {...winStats};
+  
+      switch (numsMatched) {
+        case 6: updatedWinStats['6ball'] += 1; break;
+        case 5: updatedWinStats['5ball'] += 1; break;
+        case 4: updatedWinStats['4ball'] += 1; break;
+        case 3: updatedWinStats['3ball'] += 1; break;
+        case 2: updatedWinStats['2ball'] += 1; break;
+        default: break;
+      }
+  
+      setWinStats({
+        ...updatedWinStats,
+      });
+    }
   }
 
   useInterval(() => {
